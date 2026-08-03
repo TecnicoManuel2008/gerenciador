@@ -1,0 +1,4 @@
+sqlachemy
+flask
+pymysql
+mysql

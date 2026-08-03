@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gerence de la caisse</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
+</head>
+
+<body>
+  <div class="overlay"></div>
+
+  <div class="container">
+    <h1>Home</h1>
+    
+    <div class="caisse">
+      <p><strong>Montant en Francs:</strong> {{ dados['Francs'] }} Fc</p>
+      <p><strong>Montant en Dolar:</strong> {{ dados["Dolar"] }} $</p>
+    </div>
+
+    <p class="info">Ce site web sert uniquement à gérer la caisse. <br>
+    Pour d'autres informations click <a href="#">ici</a></p>
+
+    <!-- Menu com os 3 botões -->
+    <div class="menu-card">
+      <a href="ajoute" class="btn">ajouté l'argent</a>
+      <a href="retrait" class="btn">Retrait d'argent</a>
+      <a href="listing" class="btn">Lister Opérations</a>
+    </div>
+
+    <footer>Créé par <strong>Kabassa Manuel</strong></footer>
+  </div>
+</body>
+</html>

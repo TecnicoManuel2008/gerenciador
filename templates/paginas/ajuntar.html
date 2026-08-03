@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Ajouter d'argent - Gerence de la caisse</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='style/ajuntar.css') }}?v=1">
+</head>
+<body>
+      <div class="overlay"></div>
+      <div class="container">
+          <h1>Ajouter d'argent</h1>
+        
+          <div class="caisse">
+              <p><strong>Montant en Francs:</strong> {{ data["Francs"] }} Fc</p>
+              <p><strong>Montant en Dollars:</strong> {{ data["Dolar"] }} $</p>
+          </div>
+    
+          <div class="menu-card">
+              <form action="/ajoute" method="POST" class="form-ajout">
+            
+              <label class="form-title">Choisir la devise</label>
+              <div class="radio-group">
+                  <label class="radio-label">
+                      <input type="radio" name="din" value="dolar" id="dolar" required>
+                      <span>Dolar $</span>
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="din" value="francs" id="francs" required>
+                    <span>Francs Fc</span>
+                  </label>
+              </div>
+    
+              <input type="number" placeholder="Montant" name="mont" required class="input-field">
+              <input type="text" placeholder="Description" name="libelle" required class="input-field">
+    
+              <button type="submit" class="btn">Envoyer</button>
+            </form>
+            {% if response %}
+                <p class="alert">{{ response }}</p>
+            {% endif %}
+          </div>
+    
+          <p class="info">Pour retourner à la page d'accueil click <a href="{{ url_for('index') }}" class="link">ici</a></p>
+            <footer>Créé par <strong>Kabassa Manuel</strong></footer>
+      </div>
+</body>
+</html>
