@@ -29,11 +29,11 @@
             {% for k in range(0, tam) %}
                 <tr>
                   <td data-label="ID">{{ tabela[k].id }}</td>
-                  <td data-label="Date">{{ tabela[k].data }}</td>
-                  <td data-label="Semaine">{{ tabela[k].semana }}</td>
+                  <td data-label="Date">{{ tabela[k].date }}</td>
+                  <td data-label="Semaine">{{ tabela[k].semaine }}</td>
                   <td data-label="Dolar">{{ tabela[k].dolar }}$</td>
                   <td data-label="Francs">{{ tabela[k].francs }} FC</td>
-                  <td data-label="Description">{{ tabela[k].dinscription }}</td>
+                  <td data-label="Description">{{ tabela[k].description }}</td>
                 </tr>
             {% endfor %}
           </tbody>

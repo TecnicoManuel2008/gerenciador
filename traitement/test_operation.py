@@ -1,15 +1,45 @@
 from traitement.entidades import Caisse, engine
 from sqlalchemy.orm import sessionmaker
 
-Session = sessionmaker(engine)
-
-def verifier_montant(mont: int, type_mon: str) -> bool:
+class ControlerError:
+    def __init__(self):
+        self.__Session = sessionmaker(engine)
     
-    with Session() as session:
-        donnee = session.query(Caisse.dolar, Caisse.francs).all()
+    @property
+    def MainSession(self: object) -> object:
+        return self.__Session
+    
+    def __select(self: object) -> object:
+        """ cette fonction sert a retourner la liste des operations
+        que sont dans la caisse
+        """
+        with self.__Session() as session:
+            database = session.query(Caisse).all()
+            return database
+        
+    def verifier_operation(self, mont: int, type_mon: str) -> bool:
+        """ 
+        Cette function teste si le montant de la retrait 
+        suffie pour la retrait
+        
+        si le montant suffie : return true
+        si non : return false
+        """
+        donnee = self.__select()
         if type_mon == "dolar":
             return True if mont > donnee[-1].dolar else False
         else:
-            return True if mont > donnee[-1].dolar else False
+            return True if mont > donnee[-1].franc else False
+            
+    def ilya_argent_sur_caisse(self: object) -> bool:
+        """ 
+        Cette fonction teste si il y a argent deja
+        une premiere operation dans le banque
+        """
+        donnee = self.__select()
+        print("testes: 01: ", len(donnee))
+        return False if len(donnee) == 0 else True
+            
             
 
+        
