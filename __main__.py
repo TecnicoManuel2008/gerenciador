@@ -1,5 +1,6 @@
 # importer les modules pour le programe
 # importer le module flask pour le app-web
+
 from flask import Flask, render_template, request, redirect
 
 """ 
@@ -43,7 +44,7 @@ def ajuntar():
            operation=discription
        )
        
-       response = "Operacao feita com sucesso! "
+       response = "Operation faite avec sucess! "
     return render_template("paginas/ajuntar.html", data=select_argent(), response=response)
 
 
@@ -60,7 +61,6 @@ def retrait():
        discription = str(request.form.get('libelle'))
        
        if test.verifier_operation(mont=montant, type_mon=type_argent):
-           
           if type_argent == "dolar":
               response = (f"Ce {montant}$ le Montant est tres eleve!", 0)
           else:
@@ -72,7 +72,7 @@ def retrait():
                   operation=discription
           )
 
-          response = ("Operacao feita com sucesso! ", 1)
+          response = ("Operation faite avec sucess! ", 1)
 
     return render_template("paginas/retirar.html", data=select_argent(), response=response)
 
