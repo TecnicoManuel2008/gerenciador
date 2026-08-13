@@ -10,11 +10,14 @@
  ce programme utilise 2 tables (classes) avec
  ORM (object Relational Mapping)
 """
-
-from sqlalchemy.orm import  declarative_base
+from sqlalchemy import Integer, String, Date, Column, Text
+from sqlalchemy.orm import declarative_base
 from sqlalchemy import create_engine
 
-from sqlalchemy import Integer, String, Date, Column, Text
+from rich.traceback import install
+
+install()
+# creer un object pour le controle
 
 # cree une connexion avec le address du base de donne
 engine = create_engine("sqlite:///Gerencia.db")
@@ -23,7 +26,6 @@ base = declarative_base()
 
 # cree une nouvelle table sur le DataBase
 class Caisse(base):
-
     __tablename__ = "Caisse"
     
     # definir les colunes de la table
@@ -35,7 +37,6 @@ class Caisse(base):
     francs = Column(Integer, nullable=False)
     description = Column(Text, nullable=False)
     
-
 class Argent(base):
     __tablename__ = "Argent"
     
@@ -44,13 +45,15 @@ class Argent(base):
     
     dolar = Column(Integer, nullable=False)
     francs = Column(Integer, nullable=False)
-
-
+    
 # essaye d'eviter des erreurs
 try:
     # cree les tables dans le base
     base.metadata.create_all(engine)
-    
 except Exception as ex:
     print(f"Errer: < {ex} >")
-    
+            
+# cree les tables dans le database
+# cf.inicialiser_tables_in_database()
+
+

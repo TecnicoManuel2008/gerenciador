@@ -2,12 +2,15 @@
 Cet programme sert a faire un API qui 
 permet de faire les conctacte entre le les rotes et les bases
 """
-from traitement.entidades import Caisse, Argent, engine
+from traitement.entidades import Caisse, Argent
 
-from traitement.test_operation import ControlerError
+from traitement.test_operation import Controller
 from datetime import date, datetime
 
 from rich import print
+from rich.traceback import install
+
+install()
 # LES CONSTANTS DES TEMPS
 
 # prendre le jour actuel en format: DH-MH-AH
@@ -18,27 +21,23 @@ JOUR_SEMAINE = JOUR_ACTUEL.strftime("%A")
 semaine = {
     "SUNDAY" : "DIMANCHE", "MONDAY": "LUNDI",
     "TUESDAY": "MARDI", "WEDNESDAY": "MERCREDI",
-    "THUESDAY": "JEUDI","FRIDAY": "VENDREDI",
+    "THURSDAY": "JEUDI","FRIDAY": "VENDREDI",
     "SATURDAY": "SAMEDI"
 }
 # cree une fonction lambda que retorne le jour de la semaine en francais
 semaine_act = lambda: semaine[JOUR_SEMAINE.upper()]
 # instancier le controler des Errers
-cfg = ControlerError()
+cfg = Controller()
 
 
 def inicialiser() -> None:
-    """ 
-    Cette fonction sert uniquement a inicialiser la valeur
+    """ Cette fonction sert uniquement a inicialiser la valeur
     dans le base de donne avec des valeurs nulles
     elle teste s'il a argent ou operation dans le 
     base de donne sinon il vas inicialiser avec 0-0 ou
-    des valeurs nulles
-    """
-    
+    des valeurs nulles"""
     # instancier la Session des operations
     session = cfg.MainSession()
-    
     try:
         # si il y a pas d'argent sur la caisse
         if not cfg.ilya_argent_sur_caisse():
@@ -70,8 +69,7 @@ def add_argent(date: str, mont: int,  semaine: str, type_money: str, operation: 
     :type_money/<str> -> c'est le type d'argent (franc ou dolar)
     :opération/<str> -> c'est la description  de la operation
     
-    Et cette fonction retourn  None
-     """
+    Et cette fonction retourn  None """
     # inicializar la session
     with cfg.MainSession() as session:
             # faire un requete sur la table Caisse(ORM)
@@ -112,12 +110,11 @@ def retrait_argent(date: str, mont: int, semaine: str, type_money: str, operatio
     :semaine/<str> -> c'est le jour de la semaine ex: Mardi, Mercredi, etc
     :type_money/<str> -> c'est le type d'argent (franc ou dolar)
     :opération/<str> -> c'est la description  de la operation
-    
     Et cette fonction retiurn : None"""
     # commencer la session sur cet operation
     with cfg.MainSession() as session:
-         # faire un requete sur la table Caisse(ORM)
-         # et filter tout les donnee
+        # faire un requete sur la table Caisse(ORM)
+        # et filter tout les donnee
         query = session.query(Caisse).all()
         # calculer les dolar et les Francs 
         dolar = int(query[-1].dolar) - mont
@@ -143,9 +140,12 @@ def retrait_argent(date: str, mont: int, semaine: str, type_money: str, operatio
         session.commit()
             
 def select_argent() -> dict:
-    """ """
+    """ Cette fonction sert a retourner les montants
+    d'argent que sont sur le database
+    """
     #commencer la session sur cet operation
-    with cfg.MainSession() as session:
+    session = cfg.MainSession()
+    try:
         # prendre tous les donnes dans le base de donne
         dados = session.query(Argent).all()
         # si la base de donne est vide
@@ -162,19 +162,32 @@ def select_argent() -> dict:
                  "Dolar": dados[-1].dolar,
                  "Francs": dados[-1].francs
             }
+    except Exception as ex:
+        return f"Il est arrivé un erreur: {ex}"
+    
+    finally:
+        session.close()
     
 def select_by_index(idx: int) -> list | str:
-    """ """
+    """ Cet fonction sert a retourne une liste des columne
+    selon le index du paramettre
+    args:
+         :idx<int> -> c'est le index a passar pour la database
+    """
+    # commencer la session sur cet operation
     with cfg.MainSession() as session:
-        
+        # faire un requete sur la table Caisse(ORM)
+        # et filter tout les donnee
         dados = session.query(Caisse).all()
+        # si le index est plus eleve que la quantite des registre
         if idx > len(dados):
             return "ID fora do registro"
-            
+        # si la quantite des registre est egale a 0
         if len(dados) == 0:
+            # retourne une liste des 0
             return [c-c for c in range(0, 6)]
-            
         else:
+            # retourne une liste avec chaque colonne
             return [
                 dados[idx-1].id, 
                 dados[idx-1].date, 
@@ -184,8 +197,7 @@ def select_by_index(idx: int) -> list | str:
                 dados[idx-1].description, 
             ]
 
-def listando() -> object:
-    """ """
+def lister() -> object:
     with cfg.MainSession() as session:
         data = session.query(Caisse).all()
         return data

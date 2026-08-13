@@ -3,6 +3,9 @@
 
 from flask import Flask, render_template, request, redirect
 from rich import print, inspect
+from rich.traceback import install
+
+install()
 """ 
 importer les modules personalise pour les traitements
 
@@ -12,9 +15,9 @@ importer les modules personalise pour les traitements
 c'est un application web que sert a gerer la caisse
 
 """
-from traitement.contact import add_argent, retrait_argent, select_argent, listando
+from traitement.contact import add_argent, retrait_argent, select_argent, lister
 from traitement.contact import semaine, datetime, JOUR_SEMAINE, inicialiser
-from traitement.test_operation import ControlerError
+from traitement.test_operation import Controller
 
 # cree un app flask
 app = Flask(__name__)
@@ -51,7 +54,7 @@ def ajuntar():
 @app.route('/retrait', methods=["GET", "POST"])
 def retrait():
     response = ""
-    test = ControlerError()
+    test = Controller()
     
     if request.method == "POST":
         
@@ -78,7 +81,7 @@ def retrait():
 
 @app.route('/listing', methods=['GET'])
 def listing():
-    data = listando()
+    data = lister()
     tamanho = len(data)
     return render_template('paginas/listar.html', tabela=data, tam=tamanho)
 
