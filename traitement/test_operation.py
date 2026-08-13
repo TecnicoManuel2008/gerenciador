@@ -9,7 +9,7 @@ class ControlerError:
     def MainSession(self: object) -> object:
         return self.__Session
     
-    def __select(self: object) -> object:
+    def __select__(self: object) -> object:
         """ cette fonction sert a retourner la liste des operations
         que sont dans la caisse
         """
@@ -25,7 +25,7 @@ class ControlerError:
         si le montant suffie : return true
         si non : return false
         """
-        donnee = self.__select()
+        donnee = self.__select__()
         if type_mon == "dolar":
             return True if mont > donnee[-1].dolar else False
         else:
@@ -33,12 +33,10 @@ class ControlerError:
             
     def ilya_argent_sur_caisse(self: object) -> bool:
         """ 
-        Cette fonction teste si il y a argent deja
+        Cette fonction teste si il a argent et si il a deja
         une premiere operation dans le banque
         """
-        donnee = self.__select()
-        print("testes: 01: ", len(donnee))
-        return False if len(donnee) == 0 else True
+        return False if len(self.__select__()) == 0 else True
             
             
 

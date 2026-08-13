@@ -2,7 +2,7 @@
 # importer le module flask pour le app-web
 
 from flask import Flask, render_template, request, redirect
-
+from rich import print, inspect
 """ 
 importer les modules personalise pour les traitements
 
@@ -15,7 +15,6 @@ c'est un application web que sert a gerer la caisse
 from traitement.contact import add_argent, retrait_argent, select_argent, listando
 from traitement.contact import semaine, datetime, JOUR_SEMAINE, inicialiser
 from traitement.test_operation import ControlerError
-
 
 # cree un app flask
 app = Flask(__name__)
