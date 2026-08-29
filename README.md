@@ -23,10 +23,10 @@ Este programa serve para Gerenciar Uma caixa com valores em dolares e francs
 ## ⚙️ Rodar o projeto
 
 1. Clone o repositório
-    git clone https://github.com/TecnicoManuel2008/gerenciador.git
+    ```bash git clone https://github.com/TecnicoManuel2008/gerenciador.git
 
 ## Tecnologias para download
 
 1. rich
-2. flaak
+2. flask
 3. SQlAlchemy
