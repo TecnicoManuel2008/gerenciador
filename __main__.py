@@ -2,6 +2,7 @@
 # importer le module flask pour le app-web
 
 from flask import Flask, render_template, request, redirect
+
 from rich import print, inspect
 from rich.traceback import install
 
@@ -19,11 +20,10 @@ from traitement.contact import add_argent, retrait_argent, select_argent, lister
 from traitement.contact import semaine, datetime, JOUR_SEMAINE, inicialiser
 from traitement.test_operation import Controller
 
-# cree un app flask
-app = Flask(__name__)
+MyApp = Flask(__name__)
 
 # cree la page or rote initial du web
-@app.route('/')
+@MyApp.route('/')
 def index():
     inicialiser() 
     dados = select_argent()
@@ -32,7 +32,7 @@ def index():
 
 
 # Rota ajuntar dinheiro
-@app.route('/ajoute', methods=["GET", "POST"])
+@MyApp.route('/ajoute', methods=["GET", "POST"])
 def ajuntar():
     response = ""
     if request.method == "POST":
@@ -51,7 +51,7 @@ def ajuntar():
 
 
 # Rote pour retirer de l'argent
-@app.route('/retrait', methods=["GET", "POST"])
+@MyApp.route('/retrait', methods=["GET", "POST"])
 def retrait():
     response = ""
     test = Controller()
@@ -79,19 +79,19 @@ def retrait():
     return render_template("paginas/retirar.html", data=select_argent(), response=response)
 
 
-@app.route('/listing', methods=['GET'])
+@MyApp.route('/listing', methods=['GET'])
 def listing():
     data = lister()
     tamanho = len(data)
     return render_template('paginas/listar.html', tabela=data, tam=tamanho)
 
 
-@app.route('/return', methods=['GET', 'POST'])
+@MyApp.route('/return', methods=['GET', 'POST'])
 def returne():
     return redirect("/")
     
 # inicialozar conexao
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port=8080)
+    MyApp.run(host="0.0.0.0", port=8080)
     
     
