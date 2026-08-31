@@ -1,10 +1,9 @@
-/* Fundo - você só troca a URL da foto */
+
 body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: url('image/images.jpeg') no-repeat center center fixed;
-  /*background-color: red;*/
   background-size: cover;
   color: #fff;
   display: flex;
