@@ -19,6 +19,7 @@ class Controller:
     @property
     def MainSession(self: object) -> object:
         return self.__Session
+        
     @MainSession.setter
     def MainSession(self: object, valeur: str) -> None:
         raise PermissionError('Error: tu n\'as pas la permission ! ')
@@ -26,6 +27,7 @@ class Controller:
     @property
     def Engine(self: object) -> object:
         return self.__engine
+        
     @Engine.setter
     def Engine(self, valeur: str) -> None:
         raise PermissionError('Error: tu n\'as pas la permission ! ')
@@ -33,6 +35,7 @@ class Controller:
     @property
     def Base(self):
         return self.__base
+        
     @Base.setter
     def Base(self: object, valeur: str) -> None:
         raise PermissionError('Error: tu n\'as pas la permission ! ')
