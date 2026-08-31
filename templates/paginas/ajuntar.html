@@ -1,21 +1,26 @@
+<!-- Importando todo arquivo base.html -->
+
 {% extends "base.html" %}
 
+<!-- modificando o title -->
 {% block title %}
 <title>
   Ajouter d'argent - Gerence de la caisse
 </title>
 {% endblock %}
 
+<!-- Mundando link -->
 {% block link %}
   <link rel="stylesheet" href="{{ url_for('static', filename='style/ajuntar.css') }}?v=1">
 {% endblock %}
 
+<!-- Mudando o <h1> -->
 {% block h1 %}
     <h1>Ajoute Argent</h1>
 {% endblock %}
 
 {% block formulario %}
-<form action="/ajoute" method="POST" class="form-ajout">
+<form action="{{ url_for('ajuntar') }}" method="POST" class="form-ajout">
      <label class="form-title">Choisir la devise</label>
      <div class="radio-group">
           <label class="radio-label">
