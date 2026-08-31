@@ -24,7 +24,7 @@
     <div class="menu-card">
       
       {% block formulario %}
-      <form action="/retrait"  method="POST" class="form-ajout">
+      <form action="{{ url_for('retrait') }} "  method="POST" class="form-ajout">
         
         <label class="form-title"> Choisir la devise à retirer </label>
         <div class="radio-group">

@@ -1,7 +1,7 @@
 # importer les modules pour le programe
 # importer le module flask pour le app-web
 
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 
 from rich import print, inspect
 from rich.traceback import install
@@ -88,7 +88,7 @@ def listing():
 
 @MyApp.route('/return', methods=['GET', 'POST'])
 def returne():
-    return redirect("/")
+    return redirect(url_for('index'))
     
 # inicialozar conexao
 if __name__ == '__main__':
