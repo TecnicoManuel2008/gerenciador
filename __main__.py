@@ -83,6 +83,7 @@ def retrait():
 def listing():
     data = lister()
     tamanho = len(data)
+    
     return render_template('paginas/listar.html', tabela=data, tam=tamanho)
 
 
