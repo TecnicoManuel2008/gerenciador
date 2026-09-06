@@ -1,0 +1,26 @@
+# 1. SEGREDOS
+.env
+instance/
+
+# 2. AMBIENTE VIRTUAL PYTHON
+venv/
+env/
+.venv/
+
+# 3. CACHE DO PYTHON
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# 4. BANCO SQLITE LOCAL
+*.db
+*.sqlite3
+
+# 5. ARQUIVOS DO SISTEMA
+.DS_Store
+Thumbs.db
+
+# 6. EDITORES
+.vscode/
+.idea/
