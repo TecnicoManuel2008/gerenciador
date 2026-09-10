@@ -2,12 +2,16 @@
 # importer le module flask pour le app-web
 
 from flask import Flask, render_template, request, redirect, url_for
+import flask_migrate
 
 from rich import print, inspect
 from rich.traceback import install
 
-install()
-""" 
+from hashlib import sha256
+
+
+"""
+tout feito
 importer les modules personalise pour les traitements
 
 :contact -> pour le traitement d'argent et du temps
@@ -91,6 +95,15 @@ def listing():
 def returne():
     return redirect(url_for('index'))
     
+    
+@MyApp.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == "POST":
+        user = str(request.form.get('Usuario')).strip()
+        emial = str(requets.form.get('Email')).strip()
+        
+        senha = str(request.form.get('Senha')).strip().encode('utf-8')
+            
 # inicialozar conexao
 if __name__ == '__main__':
     MyApp.run(host="0.0.0.0", port=8080)
