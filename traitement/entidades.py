@@ -14,9 +14,6 @@ from sqlalchemy import Integer, String, Date, Column, Text
 from sqlalchemy.orm import declarative_base
 from sqlalchemy import create_engine
 
-from rich.traceback import install
-
-install()
 # creer un object pour le controle
 
 # cree une connexion avec le address du base de donne
@@ -36,24 +33,22 @@ class Caisse(base):
     dolar = Column(Integer, nullable=False)
     francs = Column(Integer, nullable=False)
     description = Column(Text, nullable=False)
-    
+
 class Argent(base):
     __tablename__ = "Argent"
-    
+
     # definir les colunes de la table
     id = Column(Integer, primary_key=True, autoincrement=True)
-    
+
     dolar = Column(Integer, nullable=False)
     francs = Column(Integer, nullable=False)
-    
+
 # essaye d'eviter des erreurs
 try:
     # cree les tables dans le base
     base.metadata.create_all(engine)
 except Exception as ex:
     print(f"Errer: < {ex} >")
-            
-# cree les tables dans le database
-# cf.inicialiser_tables_in_database()
 
+# cree les tables dans le database
 

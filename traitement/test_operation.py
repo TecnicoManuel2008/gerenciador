@@ -3,9 +3,7 @@ from traitement.entidades import Caisse, Argent
 from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy import create_engine
 
-from rich.traceback import install
 
-install()
 class Controller:
     def __init__(self):
         # cree une connexion avec le address du base de donne

@@ -7,10 +7,6 @@ from traitement.entidades import Caisse, Argent
 from traitement.test_operation import Controller
 from datetime import date, datetime
 
-from rich import print
-from rich.traceback import install
-
-install()
 # LES CONSTANTS DES TEMPS
 
 # prendre le jour actuel en format: DH-MH-AH
